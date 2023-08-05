@@ -1,0 +1,11 @@
+{
+  "requestContext": {
+    "http": {
+      "method": "POST",
+      "path": "/upload"
+    }
+  },
+  "queryStringParameters": {
+    "filename": "example.webm"
+  }
+}
