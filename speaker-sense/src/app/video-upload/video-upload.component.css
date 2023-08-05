@@ -1,0 +1,40 @@
+/* video-upload.component.css */
+
+.video-upload {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.upload-heading {
+  margin-bottom: 10px;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-button, .toggle-button, .remove-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin: 5px;
+}
+
+.upload-button:hover, .toggle-button:hover, .remove-button:hover {
+  background-color: #0056b3;
+}
+
+.remove-button {
+  background-color: #dc3545;
+}
+
+.video-details {
+  margin-top: 20px;
+}

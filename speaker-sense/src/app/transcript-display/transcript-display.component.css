@@ -1,0 +1,15 @@
+.transcript-display {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .transcript h2 {
+    margin-bottom: 10px;
+  }
+  
+  .transcript p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  

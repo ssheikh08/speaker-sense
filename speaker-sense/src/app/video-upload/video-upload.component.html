@@ -1,0 +1,12 @@
+<div class="video-upload">
+  <h2 class="upload-heading">Upload Video</h2>
+  <input #fileInput type="file" accept="video/*" id="fileInput" class="file-input" (change)="onFileSelected($event)">
+  <label class="upload-button" *ngIf="!fileService.isVideoShown" for="fileInput">Select Video</label>
+  <span *ngIf="fileService.selectedVideo" class="file-name">{{ fileService.selectedVideo.name }}</span>
+  <button class="toggle-button" *ngIf="fileService.selectedVideo && !fileService.showVideoPlayer" (click)="showVideo()">Show Video</button>
+  <button class="toggle-button" *ngIf="fileService.selectedVideo && fileService.showVideoPlayer" (click)="hideVideo()">Hide Video</button>
+  <button class="remove-button" *ngIf="fileService.showRemoveButton" (click)="removeFile(fileInput)">Remove File</button>
+  <div *ngIf="fileService.selectedVideo && fileService.showVideoPlayer" class="video-details">
+    <video [src]="fileService.selectedVideo" controls></video>
+  </div>
+</div>
