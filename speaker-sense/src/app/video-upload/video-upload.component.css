@@ -16,6 +16,19 @@
   display: none;
 }
 
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.loading-spinner mat-spinner {
+  margin-bottom: 10px;
+}
+
+
 .upload-button, .toggle-button, .remove-button {
   padding: 10px 20px;
   background-color: #007bff;

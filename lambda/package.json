@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm build/lambda.zip && zip -r build/lambda.zip .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm build/lambda.zip && zip -r build/lambda.zip node_modules index.js package.json package-lock.json",
+    "test": "sam local invoke --event event.json --profile video-analysis",
+    "debug": "sam local invoke --event event.json --profile video-analysis --debug-port 5858"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { TranscriptService } from '../transcript.service'; 
 import { FileService } from '../file.service';
 import { UploadService } from '../upload.service';
@@ -10,41 +10,58 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./video-upload.component.css']
 })
 
-
 export class VideoUploadComponent {
-  selectedVideo: File | null = null; // Initialize as null
+  selectedVideo: File | null = null; 
   showVideoPlayer: boolean = false;
+  recognizedSpeech: any;
+  uploadingFile: boolean = false; // Add this variable for the loading spinner
 
   constructor(private transcriptService: TranscriptService,
      public fileService: FileService, 
      private uploadService: UploadService,
-     private http: HttpClient) {}
-  
+     private http: HttpClient,
+     private cdr: ChangeDetectorRef) {}
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    this.fileService.selectedVideo = file;
+    
     if (file && this.isVideoFile(file)) {
-      this.selectedVideo = file;
-      this.showVideoPlayer = false; // Hide video player when a new file is selected
-      this.fileService.showRemoveButton = true;
-      // Assume you have transcriptLines, set them in the service
+      this.selectedVideo = null;
+      this.showVideoPlayer = false;
+      this.fileService.showRemoveButton = false;
+      this.uploadingFile = true; // Start the loading spinner
 
       this.uploadService.getSignedUrl(file.name).subscribe(
         (response: any) => {
-          // Use the signed URL to upload the file
           this.uploadService.uploadFileToS3(response.signedUrl, file, file.type).subscribe(
-            uploadResponse => {
+            async (uploadResponse) => {
               console.log('File uploaded successfully:', uploadResponse);
-              // Additional logic after successful upload
+
+              // Call the Lambda function to process video and get transcript key
+              this.uploadService.processVideo(file.name).subscribe(
+                (processResponse: any) => {
+                  console.log('Transcript generation response:', processResponse.message);
+                  this.recognizedSpeech = processResponse.message;
+
+                  this.uploadingFile = false; // Stop the loading spinner
+                  this.fileService.showRemoveButton = true;
+                 this.fileService.selectedVideo = file;
+                },
+                (processError) => {
+                  console.error('Error processing video:', processError);
+                  this.uploadingFile = false; // Stop the loading spinner
+                }
+              );
             },
-            uploadError => {
+            (uploadError) => {
               console.error('Error uploading file:', uploadError);
+              this.uploadingFile = false; // Stop the loading spinner
             }
           );
         },
-        error => {
+        (error) => {
           console.error('Error getting signed URL:', error);
+          this.uploadingFile = false; // Stop the loading spinner
         }
       );
     } else {
@@ -73,6 +90,7 @@ export class VideoUploadComponent {
     this.fileService.showRemoveButton = false;
     this.fileService.isVideoShown = false;
     fileInput.value = null; // Reset the file input
+    this.recognizedSpeech = null;
   }
 
   private isVideoFile(file: File): boolean {
@@ -80,5 +98,4 @@ export class VideoUploadComponent {
     const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
     return allowedExtensions.includes(fileExtension);
   }
-  
 }

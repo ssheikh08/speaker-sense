@@ -22,4 +22,14 @@ export class UploadService {
   
     return this.http.put(signedUrl, file, { headers });
   }
+  processVideo(filename: string): Observable<any> {
+    const url = `${this.apiUrl}/process?filename=${filename}`;
+    return this.http.post(url, {});
+  }
+  
+  downloadTranscriptFile(transcriptKey: string): Observable<any> {
+    const url = `${this.apiUrl}/download-transcript?transcriptKey=${transcriptKey}`;
+    return this.http.get(url, { responseType: 'text' });
+  }
+  
 }

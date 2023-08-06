@@ -1,0 +1,53 @@
+# Compiled output
+speaker-sense/dist
+speaker-sense/tmp
+speaker-sense/out-tsc
+speaker-sense/bazel-out
+speaker-sense/node_modules
+speaker-sense/package-lock.json
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+speaker-sense/.angular/*
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+.angular/
+./.angular/
+./.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Ignore lambda directory
+lambda/node_modules
+lambda/.env
+lambda/.env.dev
+lambda/lambda.zip
+
+node_modules
