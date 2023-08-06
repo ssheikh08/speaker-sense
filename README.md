@@ -2,6 +2,8 @@
 
 Welcome to the SpeakerSense application repository! This application allows users to upload video files, extract audio, and generate transcripts using Azure Cognitive Services' Speech to Text API. The purpose of this application is to create automatic transcripts and speaker analytics from videos uploaded by end-users. The goal is to provide important engagement analytics from educational videos.
 
+For a demo of the application please checkout out our [hosted application](https://speaker-sense.vercel.app/video-upload)
+
 ## Table of Contents
 
 - [Overview](#overview)

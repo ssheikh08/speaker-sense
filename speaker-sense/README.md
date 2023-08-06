@@ -2,7 +2,6 @@
 
 SpeakerSense is a web application that allows users to upload video files, extract audio from the videos, and generate transcripts using Azure Cognitive Services' Speech to Text API. This README focuses on the frontend implementation of the application.
 
-For a demo of the application please checkout out our [hosted application](https://speaker-sense.vercel.app/video-upload)
 
 ## Table of Contents
 
