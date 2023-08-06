@@ -40,7 +40,7 @@ The core functionalities of the frontend include:
     `npm tsc`
 
 2. To build the application run:
-    `npm run build` 
+    `npm run start` 
 
 Application will run on `http://localhost:4200/`
 
